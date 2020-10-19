@@ -12,7 +12,12 @@ function PlotMap(){
 		.then(response=>response.json())
 		.then(data=>{
 			data.data.forEach(country=>{
-				var marker = L.marker([country.latitude,country.longitude],{riseOnHover:true});
+				var myIcon = L.icon({
+					iconUrl: `https://www.countryflags.io/${country.country_code}/flat/32.png`,
+					iconSize: [64,64],
+					iconAnchor: [32,32]
+				});
+				var marker = L.marker([country.latitude,country.longitude]);
 				marker.bindPopup(`<h1>Country:${country.location}<span><img src="https://www.countryflags.io/${country.country_code}/flat/32.png"></img></span></h1>
 					<h3>Recovered: ${country.recovered}</h3>
 					<h3>Confirmed: ${country.confirmed}</h3>
